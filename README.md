@@ -1,2 +1,2 @@
 # Clubs-n-Connect
-Clubs n Connect is a portal where associations and clubs can expose their information, activities, news, social media and much more! It promotes a healthy and active university life.
+Clubs & Connect is an innovative platform designed to connect university students with the activities, events, and resources of their associations and clubs. This project aims to promote a dynamic and participative university life by providing an attractive and functional space for the management and dissemination of relevant information. With Clubs n Connect, associations and clubs can showcase their information, activities, news, social media, and much more! It promotes a healthy and active university life.
