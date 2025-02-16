@@ -1,0 +1,1086 @@
+/*All pages properties*/
+
+body{
+    background-color: #cbddd1;
+}
+
+/* Style the title */
+.title {
+    font-size: 28px; /* Larger title size */
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1b1b1b; /* Professional dark blue-gray color */
+    text-transform: uppercase; /* Optional: uppercase for emphasis */
+    letter-spacing: 1px; /* Optional: add letter spacing */
+    font-family: 'Georgia', serif; /* Elegant serif font for the title */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.title-2 {
+    font-size: 40px; /* Larger title size */
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2c4232; /* Professional dark blue-gray color */
+    text-transform: uppercase; /* Optional: uppercase for emphasis */
+    letter-spacing: 1px; /* Optional: add letter spacing */
+    font-family: 'Georgia', serif; /* Elegant serif font for the title */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/*navbar*/
+.nav-color {
+    background-color: #272727; /*background color */
+    color: rgb(255, 255, 255); /* Text color */
+}
+
+.nav-color:hover,
+.nav-color .nav-link:hover {
+    color:  #7f8fee; /*  hover color */
+}
+
+
+
+/*add shadow when focused */
+.navbar-toggler:focus {
+    outline: 1px solid #0f0f0f;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+}
+
+/* Add shadow when the hamburger menu is active (clicked) */
+.navbar-toggler:active {
+    outline: 2px solid #0f0f0f;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add shadow */
+}
+.navbar-toggler-icon {
+    background-color: #ffffff;
+}
+
+
+/* Adjust the navbar items in collapsed view */
+.navbar-collapse {
+    text-align: center;
+    padding-top: 1rem; /* Adds space between links when collapsed */
+}
+
+.nav-item {
+    margin-bottom: 0.5rem; /* Add small margin between links in mobile view */
+}
+
+/* Add vertical line separator between links in collapsed view */
+.nav-item:not(:last-child) {
+    border-bottom: 1px solid #ccc; 
+}
+
+@media (min-width: 992px) {
+    .nav-item:not(:last-child) {
+        border-bottom: none; /* Remove the line on larger screens */
+    }
+}
+
+/***********************************************************************************/
+
+/*footer*/
+
+.quick-links a {
+    text-decoration: none; /* Eliminates line of all links*/
+    color:white;
+}
+
+.quick-links a:hover, .active-page:hover {
+    color: #7f8fee !important;
+}
+
+.active-page {
+    border-bottom: 2px solid #f0f2fc !important;
+}
+
+footer, .broadcast-color {
+    background-color: #272727; /* Dark grey background */
+    color: #fff; /* Text color */
+
+}
+
+footer {
+    position: relative;
+    z-index: 1; /* Keep footer above the wave */
+}
+
+/************************************************************************************/
+
+/*Index page*/
+
+.svg-container {
+    position: relative; /* Keeps it in normal flow but controllable */
+    width: 100%;
+    z-index: -1;
+    margin-bottom: -8px; /* Adjust to ensure it overlaps correctly without a gap */
+}
+
+.svg-container svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: absolute; /* Absolute positioning for elevation */
+    bottom: 0; /* Places it at the bottom of its container */
+    z-index: 1; /* Places it visually on top but controlled */
+}
+
+footer {
+    position: relative;
+    z-index: 2;
+    padding-top: 0;
+}
+
+
+
+.inner-square {
+    border-radius: 10px;
+    background-color: #cbddd1; /* Background color */
+}
+
+/* Ensure the broadcast section takes the full height of its container */
+.broadcast-section {
+    border: 2px solid #000 !important; /* Darker border */
+    border-radius: 8px; /* Rounded corners */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: flex-start; /* Align content at the top */
+    overflow: hidden; /* Prevent overflow */
+    animation: fadeSlideIn 1s ease-out;
+    
+}
+
+
+/* Scrollable list when content exceeds the available height */
+#broadcast-list {
+    flex-grow: 1; /* Take up remaining space */
+    overflow-y: auto; /* Enable vertical scroll if content exceeds the space */
+    max-height: 530px; /* Adjust this to limit the height */
+    padding: 0; /* Remove extra padding */
+    margin: 0; /* Remove extra margin */
+    list-style: none; /* Remove default bullet points */
+}
+
+/* Styles for each broadcast item */
+.list-group-item-black {
+    word-wrap: break-word; /* Break long words to prevent overflow */
+    overflow-wrap: break-word; /* Additional support for breaking long words */
+    background-color: #272727 !important; /* Background color */
+    border: 1px solid #000; /* Darker border for outline */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding and border are included */
+    margin: 10px 0; /* Top and bottom margin */
+    color: white !important; /* Text color */
+    box-shadow: 0 8px 8px #76927f; /* Box shadow */
+    animation: fadeSlideIn 0.8s ease-in-out; 
+}
+
+
+
+.text-muted{
+    color: white !important;
+}
+
+/* Ensure the carousel and broadcast section are both stretched to the same height */
+.row.align-items-stretch {
+    height: auto; /* Ensures that both sections can stretch */
+}
+
+/* For smaller screens (mobile and tablet) */
+@media (max-width: 991.98px) {
+    .broadcast-section {
+        margin-top: 20px; /* Adjust for mobile/tablet, if needed */
+    }
+    #broadcast-list {
+        max-height: 300px; /* Smaller max-height for mobile */
+    }
+}
+
+/* Carousel styles */
+
+
+.carousel-index .carousel-item img {
+    max-height: 80%; /* Fill the height of the carousel item */
+    width: auto; /* Maintain aspect ratio */
+    max-width: none; /* Prevent overflow beyond the carousel item */
+    object-fit: contain; /* Ensure the image covers the entire area */
+    border-radius: 15px; /* Rounded corners for images */
+}
+
+.carousel-item img {
+    max-height: 100%; /* Fill the height of the carousel item */
+    width: auto; /* Maintain aspect ratio */
+    max-width: none; /* Prevent overflow beyond the carousel item */
+    object-fit: contain; /* Ensure the image covers the entire area */
+    border-radius: 15px; /* Rounded corners for images */
+}
+
+.carousel-item {
+    height: 600px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .carousel-item {
+        height: 400px; /* Adjust the carousel item height on smaller screens */
+    }
+    .carousel-item img {
+        max-height: 100%; /* Ensure the image fills the container */
+        object-fit: contain; /* Prevent stretching */
+    }
+}
+
+
+/* Controls for the carousel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    position: absolute; 
+    top: 50%; /* Adjust the vertical position of the controls (default is usually 50%) */
+    transform: translateY(-50%);
+    background-color: black; /* Background color for carousel controls */
+}
+
+
+/* Hover effect for the carousel */
+.bordered-carousel:hover {
+    transform: scale(1.02); 
+    transition: transform 0.3s ease-in-out; 
+}
+
+/* Additional styling for the carousel inner */
+.carousel-inner {
+    height: auto; /* Ensures the carousel container adjusts height */
+}
+
+/* Spacing between carousel and broadcast section */
+.carousel-section {
+    margin-right: 100px; /* Add space between carousel and broadcast */
+}
+
+/*Carousel mini animation*/
+@keyframes slideZoomIn {
+    0% {
+        transform: translateX(100%) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.carousel-item {
+    opacity: 0;
+    animation: slideZoomIn 0.8s ease-in-out;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    animation: slideZoomIn 0.8s ease-in-out;
+}
+
+
+
+
+
+/************************************************************************************/
+
+/*asociations page OG*/ 
+
+/*
+.cards-entity-card {
+    background-color: #ffffff;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 4px 8px rgba(10, 27, 0, 0.2); 
+    border: 3px solid rgb(20, 20, 20); 
+    border-radius: 8px; 
+    overflow: hidden; 
+    
+}
+
+.cards-entity-img-wrapper {
+    height: 60%; 
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px; 
+}
+
+.cards-entity-img-top {
+    height: 60%; 
+    width: 100%; 
+    object-fit: contain; 
+    margin-top: 10%;
+    display: block; 
+    object-position: center; 
+}
+
+.cards-entity-body {
+    flex-grow: 1; 
+    display: flex;
+    align-items: flex-end; 
+    justify-content: center; 
+}
+
+.cards-entity-title {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: normal;
+    overflow: visible;
+    text-align: center;
+    font-size: 25px;
+    width: 90%;
+} 
+
+*/ 
+/*Prueba1*/
+/*
+.cards-entity-card {
+    background-color: #ffffff; 
+    height: 350px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); 
+    border: 2px solid #e6e6e6; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cards-entity-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25); 
+}
+.cards-entity-img-wrapper {
+    height: 50%; 
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 0;
+    background-color: #f7f7f7; 
+    overflow: hidden; 
+}
+
+.cards-entity-img-top {
+    height: 100%; 
+    width: 100%; 
+    object-fit: cover; 
+    object-position: center; 
+}
+
+/* 
+.cards-entity-img-wrapper {
+    height: 50%; 
+    width: 100%; 
+    background-color: #f7f7f7; 
+    display: flex;
+    justify-content: center; 
+    padding: 10px;
+}
+*/
+/* Prueba 1
+.cards-entity-img-wrapper {
+    height: 50%; 
+    width: 100%;
+    background-color: #f7f7f7;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+ }
+    */
+/* Styling for the logo/image at the top */
+/*
+.cards-entity-img-top {
+    max-height: 100%; 
+    max-width: 100%; 
+    object-fit: cover; 
+    display: block;
+    object-position: center; 
+}
+*/
+/* Content below the image (calendar icon and text) */
+/*
+.cards-entity-body {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    padding: 15px;
+    gap: 10px; 
+}
+
+
+.cards-entity-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left; 
+    color: #333; 
+    margin-bottom: 5px;
+}
+
+
+.cards-entity-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+*/
+/*Prueba2*/
+.cards-entity-card {
+    background-color: #ffffff;
+    height: 350px; /* Ensure the card has a fixed height */
+    display: flex;
+    flex-direction: column; /* Align children vertically */
+    justify-content: space-between;
+    box-shadow: 0px 4px 8px rgba(10, 27, 0, 0.2); /* Subtle shadow */
+    border: 1px solid rgb(20, 20, 20); /* Black border */
+    border-radius: 20px; /* Rounded corners */
+    overflow: hidden; /* Ensure content stays within the card */
+}
+
+
+.cards-entity-img-wrapper {
+    height: 65%; 
+    width: 100%; 
+    flex-shrink: 0; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden; 
+}
+
+.cards-entity-img-top {
+    height: 100%; /* Fill the wrapper height */
+    width: 100%; /* Fill the wrapper width */
+
+    object-fit: cover; /* Ensure the image covers the area */
+    object-position: center; /* Center the image */
+}
+
+.cards-entity-body {
+    flex-grow: 1; /* Allow this section to grow within its container */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align elements to the top */
+    padding: 10px; /* Add some padding */
+    text-align: left; /* Center text content */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+.cards-entity-title {
+    font-size: 18px; /* Adjust title size */
+    font-weight: bolder;
+     margin: 5px 0;
+}
+
+.cards-entity-description {
+    font-size: 14px; /* Smaller font for description */
+    margin-top: 5px; /* Space between title and description */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+    white-space: nowrap; /* Ensure text stays on one line (adjust if multiline is needed) */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .cards-entity-card {
+        height: 300px;
+    }
+}
+
+/*****************************************************************************************/
+
+
+/*asociation page*/
+
+.logo-circle {
+    border: 1px solid #000; /* Circular outline */
+    border-radius: 50%; /* Circular shape */
+    width: 180px; /* Bigger width */
+    height: 180px; /* Bigger height to match the circle */
+    overflow: hidden; /* Ensure the image stays inside the circle */
+    margin: 0 auto; /* Center the logo in its container */
+    background-color: #e7eee9;
+}
+
+.logo {
+    width: 100%; /* Make the image fill the circle */
+    height: 100%; /* Keep the image responsive and cover the entire circle */
+    object-fit: cover; /* Ensures the image fits the circular shape */
+}
+
+.title-near-logo {
+    font-size: 40px; /* Adjust font size */
+    font-weight: bold; /* Bold text */
+    text-align: center;
+}
+
+
+.description-square {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 767px) {
+    .description-square {
+        width: 90%; /* Reduce width to give more padding on the sides */
+    }
+}
+
+@media (max-width: 575px) {
+    .description-square {
+        width: 80%; /* Even smaller for very small screens */
+    }
+}
+
+.carousel-association .carousel-item img {
+    width: auto; /* Maintain aspect ratio */
+    max-width: none; /* Prevent overflow beyond the carousel item */
+    object-fit: cover; /* Ensure the image covers the entire area */
+    border-radius: 15px; /* Rounded corners for images */
+
+}
+
+.simple-line {
+    border: 0;
+    border-top: 2px solid #000; /* Solid black line */
+    width: 100%; /* Full width */
+    margin-top: 10px;
+    margin-bottom: 20px; /* Space around the line */
+}
+
+.gallery-item {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.calendar {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+
+.circle-wrapper {
+    text-align: center;  /* Center-aligns the content within each column */
+}
+
+.circle-item {
+    width: 150px;  
+    height: 150px;
+    border-radius: 50%;
+    background-color: #fdfdfd;  /* Green circular background */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;  /* Keeps the image clipped in a circle */
+    margin: 0 auto;  /* Center the circle */
+}
+
+.circle-item img {
+    width: 100%;  
+    height: 100%;
+    object-fit: cover;  /* Ensures the image fits well within the circle */
+}
+
+.circle-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;  /* Adjust color as needed */
+    margin-top: 10px;
+}
+
+
+.decorative-line {
+    border: none; /* Remove default border styling */
+    height: 3px; /* Line thickness */
+    background: linear-gradient(to right, transparent, #27793c, transparent); /* Gradient effect */
+    position: relative;
+    margin: 20px 0;
+}
+
+/*table admin styles*/
+
+.admin-table {
+    border: 1px solid #dee2e6;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.admin-table thead {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.admin-table thead th {
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.admin-table tbody td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6; /* Line between rows */
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none; /* Remove border from the last row */
+}
+
+.admin-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.admin-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+
+
+/* #sidebar {
+    width: 200px;
+    background-color: #343a40;
+    padding-top: 20px;
+    overflow-y: auto;
+} */
+#sidebar-nav {
+    width: 160px;
+}
+
+.nav-link-admin {
+    color: white;
+}
+
+.nav-link-admin:hover {
+    background-color: #495057;
+}
+
+.accordion-management {
+    width: 100%; 
+}
+
+@media (min-width: 768px) {
+    .accordion-management {
+        max-width: calc(100% - 250px);
+    }
+}
+
+/* Hamburger button */
+#sidebar-dashboard {
+    background-color: #000; /* Black background */
+    color: white;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    padding: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#sidebar-dashboard .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Sidebar menu */
+#sidebarMenu {
+    background-color: #000; /* Black background for menu */
+    padding: 10px;
+}
+
+/* Sidebar menu items */
+#sidebarMenu .nav-item {
+    background-color: #000; /* Black background for items */
+    color: white;
+    margin: 5px 0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#sidebarMenu .nav-item:hover {
+    background-color: #333; /* Slightly lighter on hover */
+}
+
+@media (min-width: 769px) {
+    #sidebarMenu {
+        display: none !important; /* Ensure the sidebar is hidden on larger screens */
+    }
+}
+
+.container-fluid .row.no-padding > * {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.no-padding {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+/*broadcast entity page*/
+
+.broadcast-description {
+    max-width: 200px; /* Adjust to your desired width */
+    word-wrap: break-word; /* Break long words if necessary */
+    white-space: normal; /* Allow the text to wrap to the next line */
+}
+
+
+
+/* Ramon added this para recursos */
+/* Estilo general para el contenedor de la sección de recursos */
+#resource-list {
+    background-color: #cbddd1; /* Fondo verde claro, consistente con el resto del sitio */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(10, 27, 0, 0.2); /* Sombra similar a la utilizada en otras secciones */
+    color: #333; /* Color de texto oscuro para contraste */
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Estilo para cada tarjeta de recurso */
+.resource-item {
+    background-color: #ffffff; /* Fondo blanco para cada recurso */
+    border: 1px solid #4F7849; /* Borde verde oscuro */
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tarjeta */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilo para el título de cada recurso */
+.resource-item h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #272727; /* Color oscuro para el título */
+}
+
+/* Estilo para el enlace de cada recurso */
+.resource-item a {
+    color: #7f8fee; /* Color de los enlaces, similar al color de hover en el navbar */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.resource-item a:hover {
+    color: #4F7849; /* Color verde en hover, para consistencia */
+}
+
+/*references*/
+#referencesTable {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Header */
+#referencesTable th {
+    background-color: #111111;
+    color: white;
+}
+
+/* Truncated link style */
+.truncate {
+    max-width: 200px;   /* Adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*reference admin style*/
+
+
+/* Beautify the title */
+.reference-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #495680; /* Professional dark blue-gray color */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Georgia', serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align title to the left */
+}
+
+/* Table styles */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #464647; /* Light hover effect for rows */
+}
+
+.table thead.table-dark {
+    background-color: #3a3636;
+
+    color: #424040;
+}
+
+/* Responsive table container */
+.table-responsive {
+    overflow-x: auto; /* Ensures horizontal scroll only if necessary */
+}
+
+
+/* Align cells to the left */
+.table td, 
+.table th {
+    color: #8d8989; /* Set text color to black */
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 10px; /* Add padding for a cleaner look */
+}
+
+/* Action column */
+.table th:last-child,
+.table td:last-child {
+    text-align: left; /* Align Actions column to the left */
+}
+
+/* Action buttons styling */
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+    align-items: center;
+}
+
+.action-buttons .btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action-buttons .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Scroll-friendly links */
+.table td a {
+    display: inline-block;
+    max-width: 300px; /* Limit width to avoid breaking the layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ellipsis for overflowed text */
+    color: #426e37;
+    text-decoration: none;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Slightly darker blue on hover */
+}
+
+
+
+/*Contenedor de la sección de recursos*/
+
+/* General styles for the reference section */
+.reference-list {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 20px auto; /* Center the list with some margin */
+    max-width: 100%; /* Use the full width available */
+    width: 1200px; /* Wider fixed width */
+    border: 1px solid #cce5d0; /* Soft green border */
+    border-radius: 12px; /* Slightly more rounded corners for a modern look */
+    background-color: #f3faf4; /* Subtle pastel green background */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
+    overflow: hidden; /* Prevents content overflow */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+}
+
+.reference-list:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+}
+
+/* Styles for each reference item */
+.reference-item {
+    padding: 15px 20px; /* Add padding for spacing */
+    border-bottom: 1px solid #98b395 !important; /* Use a darker gray or a contrasting color */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px; /* Make text size readable */
+    font-family: 'Arial', sans-serif; /* Clean font style */
+    cursor: pointer; /* Show pointer to indicate it's clickable */
+    background-color: #ffffff; /* White background for each item */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+    border-radius: 8px;
+    
+}
+
+/* Last item should not have a border */
+.reference-item:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+/* Hover effect for items */
+.reference-item:hover {
+    background-color: #e6f5e8; /* Soft pastel green hover effect */
+    transform: scale(1.02); /* Subtle scaling effect */
+}
+
+/* Make the entire box clickable */
+.reference-link {
+    display: block; /* Make the link behave like a block element */
+    text-decoration: none; /* Remove underline for cleaner look */
+    color: #353c4d; /* Professional dark text color */
+    transition: color 0.3s ease; /* Smooth hover effect for color */
+    width: 100%; /* Allow link to fill the full width of the box */
+}
+
+/* Optional: Hover effect for the entire box */
+.reference-link:hover {
+    color: #44518d; /* Slightly darker color on hover */
+}
+
+/* Center the container */
+.reference-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Set a wider max width for the container */
+    text-align: center; /* Center the content */
+}
+
+
+/*Grid mansory layout*/
+ 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.scrollable-container {
+    max-height: 540px; /* Set max height for better visibility */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Add padding around the container */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap; /* Enable wrapping */
+    margin-left: -10px; /* Adjusting for negative margin */
+    margin-right: -10px; /* Adjusting for negative margin */
+}
+.grid-item {
+    width: calc(33.333% - 10px); /* Width adjustment */
+    margin: 5px; /* Adjusting margins between items */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* For absolutely positioned images */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grid-item img {
+    width: 100%;
+    height: auto; /* Allow height to scale automatically */
+    max-height: 300px; /* Set a max height for the images */
+    object-fit: cover; /* Ensure the image covers the area */
+    display: block; /* Ensure images are block elements */
+}
+
+.text-normal {
+    font-weight: normal !important; /* Override bold styles */
+}
+
+.accordion-button {
+    font-weight: normal; /* Default to non-bold text */
+}
+
+
+/*Calendar*/
+
+/* Unique Login Card Styles */
+.card-login {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-login {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+    outline: 2px solid rgba(12, 12, 12, 0.3); /* Adds a subtle blue outline */
+    outline-offset: -5px; /* Ensures the outline is slightly inset */
+    transition: outline-color 0.3s ease;
+}
+
+.card-login:hover {
+    outline-color: rgba(39, 40, 41, 0.5); /* Slightly stronger outline on hover */
+}
+
+
+.card-login-photo {
+    background-color: #f8f9fa;
+}
+
+.card-login-img {
+    max-height: 300px;
+    object-fit: contain;
+    margin: auto;
+}
+
+
+.card-login-body .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.card-login-body .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.card-login-body a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.card-login-body a:hover {
+    text-decoration: underline;
+}
+
+
+.table-color {
+    color: white; /* White text for table content */
+    background-color: #333; /* Optional: Dark background for contrast */
+}
+
+.table-color th {
+    color: black; /* Black text for table headers */
+    background-color: #fff; /* Optional: Light background for table headers */
+}

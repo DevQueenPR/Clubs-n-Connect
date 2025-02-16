@@ -1,0 +1,77 @@
+#calendar {
+  padding: 20px;
+  background-color: #f3f3f3; /* Fondo negro como el Broadcast */
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  color: #ffffff; /* Texto blanco */
+}
+
+/* Calendar grid and cell styling */
+.fc-daygrid-day {
+  height: 120px;
+  border: 1px solid #ece8e8; /* Bordes más oscuros como el Broadcast */
+  background-color: #e9e5e5; /* Fondo oscuro de las celdas */
+  color: #ffffff; /* Texto blanco */
+}
+
+.fc-daygrid-day-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+}
+
+/* Styling for events */
+.fc-event {
+  background-color: #000000 !important; /* Fondo negro como el Broadcast */
+  color: #ffffff !important; /* Texto blanco */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 4px 8px;
+  font-size: 12px;
+  margin: 2px 0;
+  white-space: nowrap; /* Evita saltos de línea */
+  border: 1px solid #333333; /* Bordes oscuros */
+}
+
+/* Styling for day headers */
+.fc-col-header-cell {
+  background-color: #1a1a1a; /* Fondo oscuro como el Broadcast */
+  color: #ffffff; /* Texto blanco */
+  text-align: center;
+  font-size: 1rem;
+  border-bottom: 2px solid #333333; /* Borde inferior */
+}
+
+/* Resaltado del día actual */
+.fc-day-today {
+  background-color: #333333; /* Fondo similar al Broadcast */
+  border: 2px solid #444444; /* Bordes resaltados */
+  color: #ffffff;
+}
+
+/* Ajustar el alto de los contenedores para ver todos los días */
+.fc .fc-daygrid-day-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  color: #ffffff; /* Texto blanco */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #calendar {
+      font-size: 0.8em;
+  }
+  .fc-daygrid-day {
+      height: 90px; /* Reduce la altura en pantallas pequeñas */
+  }
+  .fc-event {
+      font-size: 10px;
+      padding: 2px 4px; /* Reduce el padding */
+  }
+}

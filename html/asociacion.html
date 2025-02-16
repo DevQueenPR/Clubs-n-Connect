@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entity page</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  
+
+  <!-- Font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FullCalendar CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+
+  <!-- Custom CSS -->
+  <link href="/css/styles.css" rel="stylesheet">
+  
+
+  <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+
+ <!-- Navbar -->
+ <div id="navbar"></div>
+
+ <div class="container mt-5">
+    <div id="association-details"></div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <hr class="decorative-line">
+    </div>
+</div>
+
+<div class="container" data-association-id="{{ associations_clubs_id }}">
+    <div class="row g-4 align-items-stretch">
+        <!-- Carousel Section -->
+        <div class="container text-center mb-4 mt-3">
+            <h1 class="mb-0 title">Anuncios</h1>
+        </div>     
+        <div id="newsCarousel" class="carousel slide col-lg-6 col-md-12" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carouselInner">
+                <div class="carousel-item active carousel-association ">
+                </div>
+                <!-- Add more items here -->
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Broadcast Section -->
+        <div class="col-lg-6 col-md-12 d-flex flex-column" id="broadcast-section-container">
+            <div class="broadcast-section border p-3 d-flex flex-column broadcast-color h-100">
+                <h3 class="text-center mb-3">
+                    <i class="fa-solid fa-bullhorn"></i> Broadcast Announcements
+                </h3>
+                <div class="inner-square p-2 flex-grow-1 overflow-auto">
+                    <ul class="list-group" id="broadcast-list-id">
+                        <!-- Broadcasts will appear here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+    <div class="row">
+        <div class="col-12">
+            <hr class="decorative-line">
+        </div>
+    </div>
+
+<!-- Activity Section -->
+<div class="container">
+    <div class="row align-items-stretch justify-content-center">
+        <!-- Activities Section -->
+        <div class="container text-center mb-4">
+            <h1 class="mb-0 title">Actividades</h1>
+        </div>        
+        <div class="col-lg-6 col-md-12 d-flex flex-column">
+                <div class="scrollable-container">
+                    <div class="grid">
+                        <!-- Images will be dynamically added here -->
+                    </div>
+            </div>
+        </div>
+        <!-- Calendar Section -->
+        <div class="col-lg-6 col-md-12 pt-md-0 pt-3">
+            <div class="calendar d-flex flex-column bg-light p-4">
+                <h3 class="text-center">Calendar</h3>
+                <div id="calendar" class="flex-grow-1"></div> <!-- Calendar container -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-12">
+        <hr class="decorative-line">
+    </div>
+</div>
+
+<!-- Board Members Section -->
+<div class="container mt-5">
+    <h1 class="text-center title">Directiva</h1>
+    <div id="board-members">
+        <!-- Aquí aparecerán los miembros de la junta -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <hr class="decorative-line">
+    </div>
+</div>
+
+<!-- Modal for Event Details -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEventTitle">Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Fecha:</strong> <span id="modalEventDate"></span></p>
+                <p><strong>Descripción:</strong></p>
+                <p id="modalEventDescription"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Social Media Section -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4 title">Redes Sociales</h2>
+    <div class="row justify-content-center">
+        <!-- Facebook Icon -->
+        <div class="col-auto">
+            <a href="#" id="facebookLink" class="text-dark">
+                <i class="fab fa-facebook fa-2x"></i>
+            </a>
+        </div>
+        <!-- Twitter Icon -->
+        <div class="col-auto">
+            <a href="#" id="twitterLink" class="text-dark">
+                <i class="fab fa-twitter fa-2x"></i>
+            </a>
+        </div>
+        <!-- Instagram Icon -->
+        <div class="col-auto">
+            <a href="#" id="instagramLink" class="text-dark">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class = "mt-4"></div> <!--Space-->
+
+<div class="svg-container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#8ec4a0" fill-opacity="1" d="M0,192L80,170.7C160,149,320,107,480,117.3C640,128,800,192,960,213.3C1120,235,1280,213,1360,202.7L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+    </svg>
+</div>
+
+<!-- Footer -->
+<div id="footer"></div>
+
+<!-- Custom JS -->
+<script src="/js/nav_footer.js"></script>
+<script src="/js/asociacion2.js"></script>
+<script src="/js/calendar.js"></script>
+
+<!-- FullCalendar JS -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Mansory layout JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- FullCalendar Initialization -->
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var calendarEl = document.getElementById('calendar');
+        
+    //     var calendar = new FullCalendar.Calendar(calendarEl, {
+    //         initialView: 'dayGridMonth',
+    //         events: 'https://ot1.ojedatech.com/api/api/events',  // Asegúrate que esta URL apunte a tu API
+    //         eventColor: '#378006'   // Personaliza el color de los eventos
+    //     });
+    
+    //     calendar.render();
+    // });
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var calendarEl = document.getElementById('calendar');
+
+    //     var calendar = new FullCalendar.Calendar(calendarEl, {
+    //         initialView: 'dayGridMonth',
+    //         events: 'https://ot1.ojedatech.com/api/api/events',
+    //         eventColor: '#378006',
+    //         eventClick: function(info) {
+    //             alert('Event: ' + info.event.title + '\nDescription: ' + (info.event.extendedProps.description || 'No description available.'));
+    //         }
+    //     });
+
+    //     calendar.render();
+    // });
+</script>
+
+
+<style>
+    /* Fondo del contenedor del calendario */
+    #calendar {
+        padding: 20px;
+        background-color: #2c2f33; /* Un gris oscuro, más claro que el negro */
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 1000px;
+        margin: auto;
+        color: #ffffff; /* Texto blanco */
+    }
+
+    /* Título del calendario */
+    .fc .fc-toolbar-title {
+        color: #ffffff; /* Texto blanco */
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    /* Encabezados de los días */
+    .fc-col-header-cell-cushion {
+        background-color: #3c4044; /* Gris oscuro */
+        color: #e0e0e0; /* Texto gris claro */
+        text-align: center;
+        font-size: 1rem;
+        border-bottom: 1px solid #4e5257; /* Borde sutil */
+    }
+
+    /* Celdas de los días */
+    .fc-daygrid-day {
+        background-color: #3c4044; /* Fondo gris oscuro */
+        border: 1px solid #4e5257; /* Borde más claro */
+        color: #ffffff; /* Texto blanco */
+    }
+
+    .fc-daygrid-day-number {
+        color: #f5f5f5; /* Números de los días en blanco */
+    }
+
+    /* Día actual */
+    .fc-day-today {
+        background-color: #4a90e2; /* Azul suave para resaltar */
+        border: 2px solid #1c6eb9; /* Borde azul más oscuro */
+        color: #ffffff; /* Texto blanco */
+    }
+
+    /* Eventos */
+    .fc-daygrid-event {
+        background-color: #1f8efa !important; /* Azul vivo */
+        color: #ffffff !important; /* Texto blanco */
+        border-radius: 5px; /* Esquinas redondeadas */
+        padding: 4px;
+        font-size: 12px;
+        margin: 2px 0;
+        border: none; /* Sin bordes */
+    }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+        #calendar {
+            font-size: 0.9em;
+        }
+        .fc-daygrid-day {
+            height: 90px; /* Ajusta la altura en pantallas pequeñas */
+        }
+        .fc-daygrid-event {
+            font-size: 10px; /* Tamaño de fuente más pequeño */
+            padding: 2px 4px; /* Espaciado interno reducido */
+        }
+    }
+</style>
+
+
+
+</body>
+</html>

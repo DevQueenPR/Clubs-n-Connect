@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Management page</title>
+    <style>
+        /* Initially hide all the relevant content */
+        #navbar, #offcanvas, #sidebarToggler, #adminAccordion, #footer {
+            display: none;
+        }
+
+        /* Styling for accordion button and active sections */
+        .accordion-button:not(.collapsed) {
+            background-color: #f1f1f1;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Gives a popout effect */
+            border-radius: 8px;
+        }
+        
+        .accordion-button {
+            color: #54c954;
+            font-weight: bold;
+        }
+
+        .accordion-item {
+            border: none;
+        }
+    </style>
+    <!--Bootstrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--Font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--Custom css-->
+    <link href="/css/styles.css" rel="stylesheet">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Sidebar Navbar -->
+    <div class="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
+        <div class="offcanvas-header">
+            <h6 class="offcanvas-title d-none d-sm-block" id="offcanvasLabel">Menú</h6>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div id="sidebarContainer"></div>
+    </div>
+    <h1 id="greetingMessage" style="margin-top: 20px; margin-left: 20px; color: #333; font-size: 2rem; font-weight: bold;">
+        Bienvenido,
+    </h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col p-4">
+                <div class="container mt-5">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-auto d-flex align-items-center">
+                            <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" id="sidebarToggler">
+                                <i class="fas fa-bars fs-3"></i>
+                            </button>
+                        </div>
+                        <!-- Column for the title -->
+                        <div class="col text-center position-relative">
+                            <h1 class="m-0 position-relative title" style="top: -10px;"> Panel de administración </h1>
+                        </div>
+                    </div>
+                    <div class="accordion" id="adminAccordion">
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header" id="headingAdminList">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdminList" aria-expanded="false" aria-controls="collapseAdminList">
+                                    <i class="fa-solid fa-users"></i> <span class="ms-1 d-none d-sm-inline">Ver Admins</span>
+                                </button>
+                            </h2>
+                            <div id="collapseAdminList" class="accordion-collapse collapse" aria-labelledby="headingAdminList" data-bs-parent="#adminAccordion">
+                                <div class="accordion-body">
+                                    <table class="admin-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre de usuario</th>
+                                                <th scope="col">Rol</th>
+                                                <th scope="col">Associación/Club</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminTableBody">
+                                            <!-- JavaScript will populate this table -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Create Admin Section -->
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header" id="headingCreateAdmin">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCreateAdmin" aria-expanded="false" aria-controls="collapseCreateAdmin">
+                                    <i class="fas fa-user-plus"></i> <span class="ms-1 d-none d-sm-inline"> Crear Admin</span>
+                                </button>
+                            </h2>
+                            <div id="collapseCreateAdmin" class="accordion-collapse collapse" aria-labelledby="headingCreateAdmin" data-bs-parent="#adminAccordion">
+                                <div class="accordion-body">
+                                    <form id="createAdminForm">
+                                        <div class="mb-3">
+                                            <label for="adminUsername" class="form-label">Nombre de administrador:</label>
+                                            <input type="text" id="adminUsername" name="adminUsername" class="form-control" required placeholder="e.g., johndoe">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="adminPassword" class="form-label">Contraseña de admin:</label>
+                                            <input type="password" id="adminPassword" name="adminPassword" class="form-control" required placeholder="e.g., P@ssw0rd!">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="confirmAdminPassword" class="form-label">Confirmar contraseña:</label>
+                                            <input type="password" id="confirmAdminPassword" class="form-control" required placeholder="Re-enter the admin password">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="userType" class="form-label">Tipo de usuario:</label>
+                                            <select id="userType" name="userType" class="form-select" required>
+                                                <option value="" disabled selected>Selecciona el tipo de admin</option>
+                                                <option value="super_admin">Super Admin</option>
+                                                <option value="association_admin">Admin de asociación </option>
+                                            </select>
+                                        </div>
+                                        <!-- Hidden dropdown for associations -->
+                                        <div class="mb-4" id="associationDropdownContainer" style="display: none;">
+                                            <label for="associationId" class="form-label">Selecionar Asociación/club:</label>
+                                            <select id="associationId" name="associationId" class="form-select">
+                                                <option value="" disabled selected>Cargando Asociaciones...</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Crear Admin</button>
+                                    </form>
+                                    <p id="result"></p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reset Password Section -->
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header" id="headingResetPassword">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseResetPassword" aria-expanded="false" aria-controls="collapseResetPassword">
+                                    <i class="fas fa-key"></i> <span class="ms-1 d-none d-sm-inline">Restablecer Contraseña de Administrador</span>
+                                </button>
+                            </h2>
+                            <div id="collapseResetPassword" class="accordion-collapse collapse" aria-labelledby="headingResetPassword" data-bs-parent="#adminAccordion">
+                                <div class="accordion-body">
+                                    <form id="resetPasswordForm" class="p-3 border rounded">
+                                        <h2 class="mb-3">Restablecer Contraseña</h2>
+                                        <div class="mb-3">
+                                            <label for="resetRoleSelect" class="form-label">Seleciona el Rol:</label>
+                                            <select id="resetRoleSelect" class="form-select" required>
+                                                <option value="" disabled selected>-- Rol --</option>
+                                                <option value="admin">Administrador</option>
+                                                <option value="super_admin">Super Administrador</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="resetAdminSelect" class="form-label">Selecionar el usuario:</label>
+                                            <select id="resetAdminSelect" class="form-select" required>
+                                                <option value="" disabled selected>-- Usuario --</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="newPassword" class="form-label">Nuevo Contraseña:</label>
+                                            <input type="password" id="newPassword" class="form-control" required minlength="6" placeholder="e.g., N3wP@ssw0rd!">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
+                                            <input type="password" id="confirmPassword" class="form-control" required minlength="6" placeholder="Re-enter the new password">
+                                        </div>
+                                        <div id="resetResultMessage" class="mt-3"></div>
+                                        <button type="submit" class="btn btn-primary">Restablecer contraseña</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Admin Section -->
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header" id="headingDeleteAdmin">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeleteAdmin" aria-expanded="false" aria-controls="collapseDeleteAdmin">
+                                    <i class="fas fa-user-times"></i> <span class="ms-1 d-none d-sm-inline"> Borrar Administrador</span>
+                                </button>
+                            </h2>
+                            <div id="collapseDeleteAdmin" class="accordion-collapse collapse" aria-labelledby="headingDeleteAdmin" data-bs-parent="#adminAccordion">
+                                <div class="accordion-body">
+                                    <form class="p-3 border rounded">
+                                        <h2 class="mb-3">Borrar Administrador</h2>
+                                        <div class="mb-3">
+                                            <label for="roleDropdown" class="form-label">Seleccionar Rol:</label>
+                                            <select id="roleDropdown" class="form-select">
+                                                <option value="" disabled selected>-- Rol --</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="super_admin">Super Administrador</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="deleteAdminDropdown" class="form-label">Seleccionar usuario:</label>
+                                            <select id="deleteAdminDropdown" class="form-select">
+                                                <option value="">-- Usuario --</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" id="deleteButton" class="btn btn-danger">Borrar Administrador</button>
+                                        <p id="statusMessage" class="mt-3 text-danger"></p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!--Custom Js-->
+    <script src="/js/nav_footer.js"></script>
+    <script src="/js/admin_administration.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/greeetings.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

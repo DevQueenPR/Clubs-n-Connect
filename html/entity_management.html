@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entity page admin</title>
+    <style>
+        #createAssociationSection, #createAdminSection, #associationFieldContainer {
+            display: none;
+        }
+    </style>
+
+ <!--Boostrap css-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!--Font awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Jquery-->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!--Custom css-->
+  <link href="/css/styles.css" rel="stylesheet">
+
+  <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+
+ <!-- Navbar -->
+ <div id="navbar"></div>
+
+<!-- Sidebar Navbar -->
+<div class="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style="display: none;">
+    <div class="offcanvas-header">
+        <h6 class="offcanvas-title d-none d-sm-block" id="offcanvasLabel">Menú</h6>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div id="sidebarContainer"></div>
+</div>
+<h1 id="greetingMessage" style="margin-top: 20px; margin-left: 20px; color: #333; font-size: 2rem; font-weight: bold;">
+    Bienvenido,
+</h1>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col p-4">         
+            <div class="container mt-5">
+                <div class="row align-items-center mb-4">
+                    <div class="col-auto d-flex align-items-center">
+                        <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" id="sidebarToggler">
+                            <i class="fas fa-bars fs-3"></i>
+                        </button>
+                    </div>
+                    <!-- Column for the title -->
+                    <div class="col text-center position-relative">
+                        <h1 class="m-0 position-relative title" style="top: -10px;">Panel de Asociación/clubs</h1>
+                    </div>
+                </div>
+                <!-- Parent Accordion -->
+                <div class="accordion" id="parentAccordion">
+                    
+                    <!-- Association and clubs view Accordion -->
+                    <div class="accordion-item mb-3" id="ViewAssociationContainer" style="display:none;">
+                        <h2 class="accordion-header" id="headingStatsCards">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStatsCards" aria-expanded="false" aria-controls="collapseStatsCards">
+                                <i class="fas fa-chart-bar"></i><span class="ms-1 d-none d-sm-inline"> Ver asociaciones/clubs</span>
+                            </button>
+                        </h2>
+                        <div id="collapseStatsCards" class="accordion-collapse collapse" aria-labelledby="headingStatsCards" data-bs-parent="#adminAccordion">
+                            <div class="accordion-body">
+                                <!-- Stats Cards -->
+                                <div id="statsCards" style="display:none;">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="card text-dark bg-white border-primary">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-university fa-3x mb-3"></i>
+                                                    <h5 class="card-title">Total de asociaciones</h5>
+                                                    <p class="card-text" id="totalAssociations">0</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card text-dark bg-white border-success">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-users fa-3x mb-3"></i>
+                                                    <h5 class="card-title">Total de Clubes</h5>
+                                                    <p class="card-text" id="totalClubs">0</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- Table to display associations -->
+                                <table id="associationsTable" class="table table-striped" style="display:none;">
+                                    <thead>
+                                        <tr>
+                                            <th>Logo</th>
+                                            <th>Título</th>
+                                            <th>Descripción</th>
+                                            <th>Facebook</th>
+                                            <th>Instagram</th>
+                                            <th>X</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="associationsTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="CreateAssociationContainer" style="display:none;">
+                  <div class="accordion-item mb-3">
+                      <h2 class="accordion-header" id="parentHeadingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#parentCollapseThree" aria-expanded="false" aria-controls="parentCollapseThree">
+                            <i class="fas fa-plus"></i><span class="ms-1 d-none d-sm-inline">Crear associación o club </span>
+                        </button>
+                      </h2>
+
+                   <div id="parentCollapseThree" class="accordion-collapse collapse" aria-labelledby="parentHeadingThree" data-bs-parent="#parentAccordion">
+                        <div class="accordion-body">
+
+                            <form id="createAssociationAdminForm" class="p-3 border rounded">
+                                <h2 class="mb-3">Detalles de asociación o club</h2>
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Título de asociación o club:</label>
+                                    <input type="text" id="title" name="title" class="form-control" required placeholder="Nombre de club asociacion">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="clasification" class="form-label">Clasificación:</label>
+                                    <select id="clasification" name="clasification" class="form-select" required>
+                                        <option value="" disabled selected>Selecionar la clasificación</option>
+                                        <option value="1">Asociación</option>
+                                        <option value="2">Club</option>
+                                    </select>
+                                </div>
+
+                                <h2 class="mb-3">Detalles del administrador</h2>
+                                <div class="mb-3">
+                                    <label for="adminUsername" class="form-label">Nombre del administrador:</label>
+                                    <input type="text" id="adminUsername" name="adminUsername" class="form-control" required placeholder="e.g., johndoe">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="adminPassword" class="form-label">Contraseña de admin:</label>
+                                    <input type="password" id="adminPassword" name="adminPassword" class="form-control" required placeholder="e.g., P@ssw0rd!">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required placeholder="Re-enter password">
+                                </div>                                
+                                <input type="hidden" id="userType" name="userType" value="association_admin">
+                                <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+                            </form>
+                            <p id="result"></p>
+                        </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  <!-- Parent Accordion Item 2 -->
+                  <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="parentHeadingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#parentCollapseOne" aria-expanded="true" aria-controls="parentCollapseOne">
+                        <i class="fas fa-filter"></i><span class="ms-1 d-none d-sm-inline">Editar asociación o club</span>
+                      </button>
+                    </h2>
+                        <div id="parentCollapseOne" class="accordion-collapse collapse" aria-labelledby="parentHeadingOne" data-bs-parent="#parentAccordion">
+                            <div class="accordion-body">
+                                <div class="p-3 border rounded">
+                                    <h2 class="mb-3">Actualizar la asociación o club</h2>
+                                    <div class="mb-3" id="filterContainer">
+                                        <label for="filter" class="form-label">Filtrar por clasificación:</label>
+                                        <select id="filter" class="form-select">
+                                            <option value="">Seleccionar clasificación...</option>
+                                            <option value="1">Asociación</option>
+                                            <option value="2">Club</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="associationSelect" class="form-label">Seleccionar Asociación/club:</label>
+                                        <select id="associationSelect" class="form-select">
+                                            <!-- <option value="">Seleccionar...</option> -->
+                                            <option value="opuesto">//</option> 
+                                        </select>
+                                    </div>
+                                    <input type="hidden" id="classificationHidden" name="classification" value="">
+                        
+                        <!-- Nested Accordion inside Parent Item 1 -->
+            <div id="nestedContentSection" class="nestedContentSection" style="display:none;">
+              <div class="accordion mt-3" id="nestedAccordion">
+                  <!-- Nested Accordion Item 1 -->
+                  <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="nestedHeadingOne">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseOne" aria-expanded="false" aria-controls="nestedCollapseOne">
+                          <i class="fas fa-edit"></i> Datos básicos
+                      </button>
+                    </h2>
+                    <div id="nestedCollapseOne" class="accordion-collapse collapse nestedContentSection" aria-labelledby="nestedHeadingOne" data-bs-parent="#nestedAccordion">
+                      <div class="accordion-body">
+                        <form id="updateForm" class="p-3 border rounded">
+                            <div class="mb-3">
+                                <label for="updateTitle" class="form-label">Título:</label>
+                                <input type="text" id="updateTitle" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Descripción:</label>
+                                <textarea id="description" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="facebook" class="form-label">Facebook:</label>
+                                <input type="text" id="facebook" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="instagram" class="form-label">Instagram:</label>
+                                <input type="text" id="instagram" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="x" class="form-label">X:</label>
+                                <input type="text" id="x" class="form-control">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="logo_image" class="form-label">Imagen de logo:</label>
+                                    <input type="file" id="logo_image" class="form-control">
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                                    <img id="imagePreview" src="" alt="Logo Preview" class="img-thumbnail d-none" style="width: 100px;">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Actualizar asociación</button>
+                        </form>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Nested Accordion Item 2 -->
+                   <div id="nestedAccordion"></div>
+                  <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="nestedHeadingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseTwo" aria-expanded="false" aria-controls="nestedCollapseTwo">
+                          <i class="fas fa-bullhorn"></i> Broadcast
+                      </button>
+                    </h2>
+                    <div id="nestedCollapseTwo" class="accordion-collapse collapse nestedContentSection" aria-labelledby="nestedHeadingTwo" data-bs-parent="#nestedAccordion">
+                      <div class="accordion-body">
+                          <div class="accordion-body">
+                              <div class="accordion-body">
+                                <!-- Icon with "Create New Broadcast" text, positioned above the table container -->
+                                <div class="d-flex justify-content-end align-items-center mt-3">
+                                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#newBroadcastModal">
+                                        <i class="fas fa-plus-circle me-2"></i> Crear Broadcast
+                                    </button>
+                                    
+                                </div>
+            
+                                <!-- Broadcasts Table Container -->
+                                <div id="broadcastsContainer" class="table-responsive mt-3">
+                                    <!-- Table structure will be dynamically created here -->
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  
+                  <!-- Nested Accordion Item 3 -->
+                  <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="nestedHeadingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseThree" aria-expanded="false" aria-controls="nestedCollapseThree">
+                          <i class="fas fa-images"></i> Anuncios
+                      </button>
+                    </h2>
+                    <div id="nestedCollapseThree" class="accordion-collapse collapse nestedContentSection" aria-labelledby="nestedHeadingThree" data-bs-parent="#nestedAccordion">
+                      <div class="accordion-body">
+                          <div class="accordion-body">
+                            <div class="d-flex justify-content-end">
+                              <button type="button" class="btn btn-info justify-content-start" id="showNewsImagesBtn" data-bs-toggle="modal" data-bs-target="#newsImagesModal">Mostrar imágenes de noticias</button>
+                            </div>
+                              <!-- <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#addImageModal">Añadir una nueva imagen</button> -->
+                              <form id="addImageForm">
+                                <input type="hidden" id="associationIdForImage" value=""> 
+                                <div class="mb-3">
+                                    <label for="imageUpload" class="form-label">Seleccionar imagen:</label>
+                                    <input type="file" id="imageUpload" class="form-control" accept=".png, .jpg, .jpeg" required>
+                                </div>
+                                <div class="d-flex justify-content-start">
+                                    <button type="button" class="btn btn-primary " id="submitImageBtn">Subir imagen</button>
+                                </div>
+                            </form>
+                            
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Nested Accordion Item 4 -->
+                  <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="nestedHeadingFour">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseFour" aria-expanded="false" aria-controls="nestedCollapseFour">
+                          <i class="fas fa-upload"></i> Actividades
+                      </button>
+                    </h2>
+                    <div id="nestedCollapseFour" class="accordion-collapse collapse nestedContentSection" aria-labelledby="nestedHeadingFour" data-bs-parent="#nestedAccordion">
+                      <div class="accordion-body">
+                          <div id="activity-upload-section" class="mt-4">
+                              <h2>Subir imagen de actividad</h2>
+                               <!-- Button to View Images -->
+    <!-- <button id="viewImagesBtn" class="btn btn-primary mt-3">Ver Imágenes</button> -->
+                              <form id="activityform" enctype="multipart/form-data">
+                                  <input type="file" name="image" accept="image/png, image/jpeg, image/jpg" required class="form-control">
+                                  <button type="submit" class="btn btn-success mt-3">Subir imagen</button>
+                              </form>
+                              <div id="activity-images" class="mt-3">
+                                  <div id="image-gallery"></div>
+                              </div>
+                          </div>
+                          <div id="activityImagesContainer" class="row"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="nestedHeadingCalendar">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseCalendar" aria-expanded="false" aria-controls="nestedCollapseFour">
+                            <i class="fas fa-calendar"></i> Calendario
+                        </button>
+                    </h2>
+                    -->
+                    <!-- Calendario  -->
+                
+                    <!-- SECCIÓN: Calendario de Actividades -->
+                    <div class="accordion mb-3" id="calendarAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingCalendar">
+                                <button
+                                    class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseCalendar"
+                                    aria-expanded="false"
+                                    aria-controls="collapseCalendar">
+                                    <i class="fas fa-calendar"></i> Calendario
+                                </button>
+                            </h2>
+                            <div
+                                id="collapseCalendar"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="headingCalendar"
+                                data-bs-parent="#calendarAccordion">
+                                <div class="accordion-body">
+                                    <!-- Aquí va la sección completa del calendario -->
+                                    <div id="calendarSection">
+                                        <!-- Botón para crear un nuevo evento -->
+                                        <div class="mb-3 d-flex justify-content-end">
+                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">
+                                                <i class="fas fa-plus"></i> Crear nuevo evento
+                                            </button>
+                                        </div>
+
+                                        <!-- Tabla para mostrar los eventos -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>Título</th>
+                                                        <th>Descripción</th>
+                                                        <th>Fecha</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="calendarTableBody">
+                                                    <!-- Los eventos se cargarán dinámicamente aquí -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Modal para Crear/Editar Evento
+                    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="eventModalLabel">Editar Evento</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="eventForm">
+                                        <input type="hidden" id="eventId">
+                                        <div class="mb-3">
+                                            <label for="eventTitle" class="form-label">Título</label>
+                                            <input type="text" class="form-control" id="eventTitle" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="eventDescription" class="form-label">Descripción</label>
+                                            <textarea class="form-control" id="eventDescription" rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="eventDate" class="form-label">Fecha</label>
+                                            <input type="date" class="form-control" id="eventDate" required>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="saveEventBtn" class="btn btn-primary">Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Modal para Crear/Editar Evento -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <input type="hidden" id="eventId">
+                    <!-- Event Title -->
+                    <div class="mb-3">
+                        <label for="eventTitle" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="eventTitle" required>
+                    </div>
+                    <!-- Event Description -->
+                    <div class="mb-3">
+                        <label for="eventDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="eventDescription" rows="3"></textarea>
+                    </div>
+                    <!-- Event Date -->
+                    <div class="mb-3">
+                        <label for="eventDate" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="eventDate" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="saveEventBtn" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    
+
+                   
+                    
+
+                    <!-- Calendario end -->
+                    
+                  <!-- Nested Accordion Item 5 -->
+                  <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="nestedHeadingFive">
+                      <button class="accordion-button collapsed nestedContentSection" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseFive" aria-expanded="false" aria-controls="nestedCollapseFive">
+                          <i class="fas fa-users"></i> Miembros de directiva
+                      </button>
+                    </h2>
+                    <div id="nestedCollapseFive" class="accordion-collapse collapse" aria-labelledby="nestedHeadingFive" data-bs-parent="#nestedAccordion">
+                      <div class="accordion-body">
+                          <form id="updateBoardForm" enctype="multipart/form-data">
+                              <!-- President -->
+                              <div class="mb-3">
+                                  <label for="president_name" class="form-label">Nombre de presidente</label>
+                                  <input type="text" id="president_name" name="president_name" class="form-control">
+                                  <img id="president_img" src="" alt="President Image" style="max-width: 100px; display: block; margin-top: 10px;">
+                                  <input type="file" id="president_image" name="president_image" class="form-control mt-2" accept="image/*" onchange="previewImage(this, 'president_img')">
+                              </div>
+              
+                              <!-- Vice President -->
+                              <div class="mb-3">
+                                  <label for="vicepresident_name" class="form-label">Nombre de vice-presidente</label>
+                                  <input type="text" id="vicepresident_name" name="vicepresident_name" class="form-control">
+                                  <img id="vicepresident_img" src="" alt="Vice President Image" style="max-width: 100px; display: block; margin-top: 10px;">
+                                  <input type="file" id="vicepresident_image" name="vicepresident_image" class="form-control mt-2" accept="image/*" onchange="previewImage(this, 'vicepresident_img')">
+                              </div>
+              
+                              <!-- Secretary -->
+                              <div class="mb-3">
+                                  <label for="secretary_name" class="form-label">Nombre de secretario</label>
+                                  <input type="text" id="secretary_name" name="secretary_name" class="form-control">
+                                  <img id="secretary_img" src="" alt="Secretary Image" style="max-width: 100px; display: block; margin-top: 10px;">
+                                  <input type="file" id="secretary_image" name="secretary_image" class="form-control mt-2" accept="image/*" onchange="previewImage(this, 'secretary_img')">
+                              </div>
+              
+                              <!-- Treasurer -->
+                              <div class="mb-3">
+                                  <label for="treasurer_name" class="form-label">Nombre del tesorero</label>
+                                  <input type="text" id="treasurer_name" name="treasurer_name" class="form-control">
+                                  <img id="treasurer_img" src="" alt="Treasurer Image" style="max-width: 100px; display: block; margin-top: 10px;">
+                                  <input type="file" id="treasurer_image" name="treasurer_image" class="form-control mt-2" accept="image/*" onchange="previewImage(this, 'treasurer_img')">
+                              </div>
+              
+                              <!-- Vocal 1 -->
+                              <div class="mb-3">
+                                  <label for="vocal_1_name" class="form-label">Nombre de vocal </label>
+                                  <input type="text" id="vocal_1_name" name="vocal_1_name" class="form-control">
+                                  <img id="vocal_1_img" src="" alt="Vocal 1 Image" style="max-width: 100px; display: block; margin-top: 10px;">
+                                  <input type="file" id="vocal_1_image" name="vocal_1_image" class="form-control mt-2" accept="image/*" onchange="previewImage(this, 'vocal_1_img')">
+                              </div>
+              
+                              <!-- Vocal 2 -->
+                              <div class="mb-3">
+                                  <label for="vocal_2_name" class="form-label">Nombre de vocal </label>
+                                  <input type="text" id="vocal_2_name" name="vocal_2_name" class="form-control">
+                                  <img id="vocal_2_img" src="" alt="Vocal 2 Image" style="max-width: 100px; display: block; margin-top: 10px;">
+                                  <input type="file" id="vocal_2_image" name="vocal_2_image" class="form-control mt-2" accept="image/*" onchange="previewImage(this, 'vocal_2_img');  logVocal2Details()">
+                              </div>
+              
+                              <!-- Vocal 3 -->
+                              <div class="mb-3">
+                                  <label for="vocal_3_name" class="form-label">Nombre de vocal </label>
+                                  <input type="text" id="vocal_3_name" name="vocal_3_name" class="form-control">
+                                  <img id="vocal_3_img" src="" alt="Vocal 3 Image" style="max-width: 100px; display: block; margin-top: 10px;">
+                                  <input type="file" id="vocal_3_image" name="vocal_3_image" class="form-control mt-2" accept="image/*" onchange="previewImage(this, 'vocal_3_img')">
+                              </div>
+              
+                              <!-- Submit button -->
+                              <button type="button" class="btn btn-primary" onclick="updateBoard()">Actualizar miembros</button>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            
+                <!-- End of Nested Accordion -->
+                
+            </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <!-- Parent Accordion Item 3 -->
+                  <div class="accordion-item"  id="deleteAssociationContainer" style="display: none;">
+                    <h2 class="accordion-header" id="parentHeadingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#parentCollapseTwo" aria-expanded="false" aria-controls="parentCollapseTwo">
+                        <i class="fas fa-trash-alt"></i><span class="ms-1 d-none d-sm-inline">Borrar associación o club</span>
+                      </button>
+                    </h2>
+                    <div id="parentCollapseTwo" class="accordion-collapse collapse" aria-labelledby="parentHeadingTwo" data-bs-parent="#parentAccordion">
+                      <div class="accordion-body">
+                          <form id="deleteAssociationForm">
+                              <h2>Borrar Asociación or club</h2>
+                              <label for="entityType">Seleccionar asociación o club:</label><br>
+                              <select id="entityType" name="entityType" class="form-select" required>
+                                  <option value="" disabled selected>Seleccionar tipo</option>
+                                  <option value="1">Asociación</option>
+                                  <option value="2">Club</option>
+                              </select><br>
+                              <label for="deleteAssociationId">Seleccionar asociación/club:</label><br>
+                              <select id="deleteAssociationId" name="deleteAssociationId" class="form-select" required>
+                                  <option value="" disabled selected>Seleccionar asociación/club</option>
+                              </select><br>
+                              <button type="submit" class="btn btn-danger mt-3">Borrar</button>
+                          </form>
+                          <p id="deleteResult"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+  
+
+<!-- Delete Image Modal -->
+<div class="modal fade" id="deleteImageModal" tabindex="-1" aria-labelledby="deleteImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteImageModalLabel">Confirmar eliminación</h5>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que quiere eliminar esta imagen?</p>
+                <img id="imageToDelete" src="" alt="Image to delete" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Borrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal for creating a new broadcast -->
+<div class="modal fade" id="newBroadcastModal" tabindex="-1" aria-labelledby="newBroadcastModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newBroadcastModalLabel">Crear nuevo broadcast</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newBroadcastForm">
+                    <div class="mb-3">
+                        <label for="broadcastTitle" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="broadcastTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="broadcastDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="broadcastDescription" rows="3" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="saveNewBroadcast" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for editing a broadcast -->
+<div class="modal fade" id="editBroadcastModal" tabindex="-1" aria-labelledby="editBroadcastModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBroadcastModalLabel">Editar Broadcast</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editBroadcastForm">
+                    <input type="hidden" id="editBroadcastId"> <!-- Hidden field for broadcast ID -->
+                    <div class="mb-3">
+                        <label for="editBroadcastTitle" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="editBroadcastTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editBroadcastDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="editBroadcastDescription" rows="3" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="saveEditBroadcast" class="btn btn-primary">Actualizar Broadcast</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for showing news images -->
+<div class="modal fade" id="newsImagesModal" tabindex="-1" aria-labelledby="newsImagesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newsImagesModalLabel">Imágenes de anuncios</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="newsImagesContainer" class="row"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Image Modal -->
+<div class="modal fade" id="deleteImageModal" tabindex="-1" aria-labelledby="deleteImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteImageModalLabel">Borrar imagen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que quiere borrar esta imagen?</p>
+                <img id="imageToDelete" class="img-fluid" src="" alt="Image to Delete">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Borrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Activity Images -->
+<div class="modal fade" id="activityImagesModal" tabindex="-1" aria-labelledby="activityImagesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activityImagesModalLabel">Imágenes de Actividades</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Images will be dynamically inserted here -->
+                <div class="activityImagesContainer row"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ </div>
+     <!-- Footer -->
+  <div id="footer"></div>
+
+  <!--Custom Js-->
+  <script src="/js/nav_footer.js" ></script>
+
+  <script src="/js/entity_management.js" ></script>
+
+  <script src="/js/greeetings.js" ></script>
+
+  <script src="/js/calendar.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>
