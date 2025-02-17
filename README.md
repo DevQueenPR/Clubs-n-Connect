@@ -7,7 +7,7 @@ Clubs & Connect is an innovative platform designed to connect university student
   - LinkedIn: [Génesis M. Ojeda](https://www.linkedin.com/in/g%C3%A9nesis-ojeda-451576302?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 - Ramón P. Valentín
   - GitHub: [RamonvCS](https://github.com/RamonvCS)
-  - LinkedIn: [Ramón Valentín]([www.linkedin.com/in/ramonvalentinrivera](https://www.linkedin.com/in/ramonvalentinrivera/))
+  - LinkedIn: [Ramón Valentín]()
 - Ryan J. Vega
   - GitHub: [Ryanjvee](https://github.com/ryanjvee)
   - LinkedIn: [Ryan Vega](https://www.linkedin.com/in/ryan-vega-621838340/)
